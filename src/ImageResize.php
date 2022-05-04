@@ -106,6 +106,7 @@ class ImageResize
             $venture,
             $resizeKey
         );
+        
 
         $imageParams = $imageParams ?: [];
         if (isset($imageParams['ow'])) {
