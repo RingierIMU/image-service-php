@@ -3,7 +3,7 @@
     "description": "Ringier SA Image Service PHP integration helper",
     "keywords": [],
     "homepage": "https://github.com/RingierIMU/image-service-php",
-    "license": "private",
+    "license": "proprietary",
     "authors": [
         {
             "name": "Matthew Nessworthy",
