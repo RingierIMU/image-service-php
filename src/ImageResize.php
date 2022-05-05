@@ -2,8 +2,6 @@
 
 namespace RingierIMU\ImageService;
 
-use LZCompressor\LZString;
-
 class ImageResize
 {
     /**
@@ -129,7 +127,7 @@ class ImageResize
                 array_merge(
                     [$imagePathParams ?: '-'],
                     [
-                        LZString::compressToBase64(
+                        base64_encode(
                             json_encode(
                                 array_replace_recursive(
                                     [

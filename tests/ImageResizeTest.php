@@ -69,7 +69,7 @@ final class ImageResizeTest extends TestCase
         );
 
         $this->assertEquals(
-            'https://i.rimu.ci/t/hz/pi/og-template-1200w-630h/a533bf0ac34ea53a0ac4bb9c0d2b7520/-/N4IgLgpgtgDgNgQ0iAXCAVgewEYFoAMALLgEz4kkgA0IAThPAgMbQQB2YAzqqGAJZg4EAIyoQAFQFCABHD5sI00TX6CIlNJLWz5iyjU4BXbKqFiAysdOK5CkAF8afKAgDmEbilBxMrzDxAAMz4zNE4AZhQAHQB6WIALTFo%2BAC9MNlxgoU5cGFpMABNYmD5iviYwQ3pYgEcAa0IoFIB2dFiIADZsCEIOgFYCgpJwiHwIQL7m4UCmAuwC8MDe7ECRJgAOQnWO2b6SADp0GFcHGmxmOtd8wzYCgKyIMQjouJjE5LSMh5y8wrKyipVCC1BpNVrtLo9fqDYajcaTaazeaLZarYQbLY7Ap7Q7HBz2exAA%3D/pretty-seo-filename.jpg',
+            'https://i.rimu.ci/t/hz/pi/og-template-1200w-630h/a02345306db7136af765a1b43e648f5b/-/eyJ0ZW1wbGF0ZSI6ImpvYi0wNC0yMDIyIiwicmVwbGFjZW1lbnRzIjp7InRpdGxlMSI6IlRpdGxlIGxpbmUgMSIsInRpdGxlMiI6IlRpdGxlIGxpbmUgMiIsInN1YnRpdGxlIjoiU3VidGl0bGUgbGluZSJ9LCJpbWFnZXMiOnsibG9nbyI6eyJmaWxlIjoiczM6XC9cL2hvcml6b24tZmlsZXMtcHJvZFwvcGlcL3BpY3R1cmVcL3FrNG16N2pcL2U2YmU0NjVkZDIzZTBlZjU3MWZjZGJkM2Y0NmJmZTFjODQ4NmNkNTIuanBnIn0sImJhY2tncm91bmQiOnsiZmlsZSI6InMzOlwvXC9ob3Jpem9uLWZpbGVzLXByb2RcL3BpXC9waWN0dXJlXC9xazRtejdqXC9lNmJlNDY1ZGQyM2UwZWY1NzFmY2RiZDNmNDZiZmUxYzg0ODZjZDUyLmpwZyJ9fX0%3D/pretty-seo-filename.jpg',
             $url
         );
     }
