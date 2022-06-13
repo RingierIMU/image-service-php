@@ -1,3 +1,3 @@
 {
-    "extends": ["RingierIMU>rarkins/renovate-config"]
+    "extends": ["github>RingierIMU/renovate-config"]
 }
