@@ -1,10 +1,8 @@
-preset: psr12
-
-risky: false
-
-disabled:
-
-enabled:
+php:
+  preset: psr12
+  risky: false
+  disabled:
+  enabled:
     - alpha_ordered_imports
     - binary_operator_spaces
     - blank_line_before_return
@@ -15,7 +13,6 @@ enabled:
     - linebreak_after_opening_tag
     - method_separation
     - native_function_casing
-    - no_blank_lines_after_phpdoc
     - no_blank_lines_after_return
     - no_blank_lines_after_throw
     - no_blank_lines_between_imports
@@ -61,3 +58,11 @@ enabled:
     - unalign_equals
     - unary_operator_spaces
     - whitespace_after_comma_in_array
+  finder:
+    exclude:
+      - "modules"
+      - "node_modules"
+      - "nova"
+      - "storage"
+      - "spark"
+      - "vendor"
