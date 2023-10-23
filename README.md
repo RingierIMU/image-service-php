@@ -5,7 +5,7 @@
 Instantiate an instance of the resize helper using the image service base url and security key you were provided
 ```
 $imageResize = new ImageResize(
-    'https://i.rimu.ci/',
+    'https://image-service.ringier.tech/',
     'your-security-key',
 );
 ```
