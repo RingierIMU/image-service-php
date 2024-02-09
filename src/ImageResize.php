@@ -53,22 +53,16 @@ class ImageResize
             )
         );
 
-        if (isset($imageParams['ow'])) {
-            $imageParams['ow'] = base64_encode($imageParams['ow']);
-        }
+        $imageHost = rtrim($this->imageServiceUrl, '/');
+
         unset($imageParams['s']);
         ksort($imageParams);
+        $imageParamsPath = $imageParams ? base64_encode(json_encode($imageParams)) : '';
 
-        $imageHost = rtrim($this->imageServiceUrl, '/');
-        $imagePathParams = http_build_query(
-            $imageParams,
-            '',
-            '~'
-        );
         $imagePathPostfix = implode(
             '/',
             [
-                urlencode($imagePathParams ?: '-'),
+                urlencode('-' . $imageParamsPath),
                 trim($sourceImageUrl, '/'),
             ]
         );
@@ -105,19 +99,11 @@ class ImageResize
             $resizeKey
         );
 
-        $imageParams = $imageParams ?: [];
-        if (isset($imageParams['ow'])) {
-            $imageParams['ow'] = base64_encode($imageParams['ow']);
-        }
         unset($imageParams['s']);
         ksort($imageParams);
+        $imageParamsPath = $imageParams ? base64_encode(json_encode($imageParams)) : '';
 
         $imageHost = rtrim($this->imageServiceUrl, '/');
-        $imagePathParams = http_build_query(
-            $imageParams,
-            '',
-            '~'
-        );
         $imagePathPostfix = implode(
             '/',
             array_map(
@@ -125,7 +111,7 @@ class ImageResize
                     return urlencode($item);
                 },
                 array_merge(
-                    [$imagePathParams ?: '-'],
+                    ['-' . $imageParamsPath],
                     [
                         base64_encode(
                             json_encode(
