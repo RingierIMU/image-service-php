@@ -57,7 +57,7 @@ class ImageResize
 
         unset($imageParams['s']);
         ksort($imageParams);
-        $imageParamsPath = $imageParams ? base64_encode(json_encode($imageParams)) : '';
+        $imageParamsPath = $imageParams ? UrlCodec::compress(self::jsonEncode($imageParams)) : '';
 
         $imagePathPostfix = implode(
             '/',
@@ -101,7 +101,7 @@ class ImageResize
 
         unset($imageParams['s']);
         ksort($imageParams);
-        $imageParamsPath = $imageParams ? base64_encode(json_encode($imageParams)) : '';
+        $imageParamsPath = $imageParams ? UrlCodec::compress(self::jsonEncode($imageParams)) : '';
 
         $imageHost = rtrim($this->imageServiceUrl, '/');
         $imagePathPostfix = implode(
@@ -113,8 +113,8 @@ class ImageResize
                 array_merge(
                     ['-' . $imageParamsPath],
                     [
-                        base64_encode(
-                            json_encode(
+                        UrlCodec::compress(
+                            self::jsonEncode(
                                 array_replace_recursive(
                                     [
                                         'template' => null,
@@ -146,5 +146,13 @@ class ImageResize
             . $signature
             . '/'
             . $imagePathPostfix;
+    }
+
+    protected static function jsonEncode(array $params): string
+    {
+        return json_encode(
+            $params,
+            JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE
+        );
     }
 }
