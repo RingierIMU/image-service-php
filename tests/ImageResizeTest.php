@@ -34,8 +34,36 @@ final class ImageResizeTest extends TestCase
             'horizon-files-prod/pi/picture/qk4mz7j/e6be465dd23e0ef571fcdbd3f46bfe1c8486cd52.jpg',
         );
 
+        // directories compress into a token, the filename stays readable
         $this->assertEquals(
-            'https://image-service.ringier.tech/hz/pi/listing-thumb-360w/a6c9235a796ac9a4d40a425cf9194e9d/-/horizon-files-prod/pi/picture/qk4mz7j/e6be465dd23e0ef571fcdbd3f46bfe1c8486cd52.jpg',
+            'https://image-service.ringier.tech/hz/pi/listing-thumb-360w/WtOn6QZtQBeHwqijej_Cyg/-/_1w6IUmDdh-bQw2yS3yjwLAA/e6be465dd23e0ef571fcdbd3f46bfe1c8486cd52.jpg',
+            $url
+        );
+
+        $this->assertEquals(
+            'horizon-files-prod/pi/picture/qk4mz7j/e6be465dd23e0ef571fcdbd3f46bfe1c8486cd52.jpg',
+            UrlCodec::decompressSourcePath(
+                implode('/', array_slice(explode('/', $url), 8))
+            )
+        );
+    }
+
+    public function testResizeUrlKeepsShortSourcePathsPlain(): void
+    {
+        $imageResize = new ImageResize(
+            'https://image-service.ringier.tech/',
+            'test-key',
+        );
+
+        $url = $imageResize->buildUrl(
+            'hz',
+            'pi',
+            'listing-thumb-360w',
+            'bucket/file.jpg',
+        );
+
+        $this->assertEquals(
+            'https://image-service.ringier.tech/hz/pi/listing-thumb-360w/vRiosggBpO5G9nOcRkk2-g/-/bucket/file.jpg',
             $url
         );
     }
@@ -60,7 +88,7 @@ final class ImageResizeTest extends TestCase
         );
 
         $this->assertEquals(
-            'https://image-service.ringier.tech/hz/pi/listing-thumb-360w/69f69a5d4d68f7527396ae69d27817af/-_1g2WtZKDflMBZy8jEAJzPjM0MagE/horizon-files-prod/pi/picture/qk4mz7j/e6be465dd23e0ef571fcdbd3f46bfe1c8486cd52.jpg',
+            'https://image-service.ringier.tech/hz/pi/listing-thumb-360w/We1ryJtuobglqBVQUKoiMg/-_1g2WtZKDflMBZy8jEAJzPjM0MagE/_1w6IUmDdh-bQw2yS3yjwLAA/e6be465dd23e0ef571fcdbd3f46bfe1c8486cd52.jpg',
             $url
         );
 
@@ -68,6 +96,13 @@ final class ImageResizeTest extends TestCase
         $this->assertEquals(
             '{"fit":"crop","h":240,"w":360}',
             UrlCodec::decompress(mb_substr($paramsSegment, 1))
+        );
+
+        $this->assertEquals(
+            'horizon-files-prod/pi/picture/qk4mz7j/e6be465dd23e0ef571fcdbd3f46bfe1c8486cd52.jpg',
+            UrlCodec::decompressSourcePath(
+                implode('/', array_slice(explode('/', $url), 8))
+            )
         );
     }
 
@@ -102,7 +137,7 @@ final class ImageResizeTest extends TestCase
         );
 
         $this->assertEquals(
-            'https://image-service.ringier.tech/t/hz/pi/og-template-1200w-630h/082c612ebc6bb7375093509ce60c770e/-/_1I8fN4FSqkANM-gqGyO5HEjdC9QusGgNLovoCWxbE4n5ggQErPAqzTXKrzLP0U82SUk3MTFNSjIxTDVLTTM0N05JTklKM00zMktJSDZMtTCzMklNMjYBFSzr-TE0L-2prAQ/pretty-seo-filename.jpg',
+            'https://image-service.ringier.tech/t/hz/pi/og-template-1200w-630h/CCxhLrxrtzdQk1Cc5gx3Dg/-/_1I8fN4FSqkANM-gqGyO5HEjdC9QusGgNLovoCWxbE4n5ggQErPAqzTXKrzLP0U82SUk3MTFNSjIxTDVLTTM0N05JTklKM00zMktJSDZMtTCzMklNMjYBFSzr-TE0L-2prAQ/pretty-seo-filename.jpg',
             $url
         );
 
