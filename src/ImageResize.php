@@ -42,16 +42,6 @@ class ImageResize
         } elseif (mb_substr($sourceImageUrl, 0, 8) === 'https://') {
             $sourceImageUrl = mb_substr($sourceImageUrl, 8);
         }
-        $sourceImageUrl = implode(
-            '/',
-            array_map(
-                'rawurlencode',
-                explode(
-                    '/',
-                    $sourceImageUrl
-                )
-            )
-        );
 
         $imageHost = rtrim($this->imageServiceUrl, '/');
 
@@ -63,17 +53,11 @@ class ImageResize
             '/',
             [
                 urlencode('-' . $imageParamsPath),
-                trim($sourceImageUrl, '/'),
+                UrlCodec::compressSourcePath(trim($sourceImageUrl, '/')),
             ]
         );
 
-        $signature = md5(
-            $this->imageServiceKey
-            . ':'
-            . $resizePath
-            . '/'
-            . $imagePathPostfix
-        );
+        $signature = $this->signature($resizePath . '/' . $imagePathPostfix);
 
         return $imageHost
             . '/'
@@ -131,13 +115,7 @@ class ImageResize
             )
         );
 
-        $signature = md5(
-            $this->imageServiceKey
-            . ':'
-            . $resizePath
-            . '/'
-            . $imagePathPostfix
-        );
+        $signature = $this->signature($resizePath . '/' . $imagePathPostfix);
 
         return $imageHost
             . '/'
@@ -146,6 +124,24 @@ class ImageResize
             . $signature
             . '/'
             . $imagePathPostfix;
+    }
+
+    /**
+     * Unpadded URL-safe base64 of the raw md5 digest: 22 characters instead
+     * of the 32 hex ones. The image service accepts both encodings.
+     *
+     * @param string $signedPath
+     */
+    protected function signature(string $signedPath): string
+    {
+        return UrlCodec::base64UrlEncode(
+            md5(
+                $this->imageServiceKey
+                . ':'
+                . $signedPath,
+                true
+            )
+        );
     }
 
     protected static function jsonEncode(array $params): string

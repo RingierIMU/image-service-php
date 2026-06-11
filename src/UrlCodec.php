@@ -17,6 +17,12 @@ use InvalidArgumentException;
  * Tokens without the '_' prefix are decoded as legacy standard base64, so
  * URLs generated before compression was introduced keep working.
  *
+ * Source image paths ('bucket/dir/file.jpg') use the same token format via
+ * compressSourcePath(): the whole path, or just its directory part with the
+ * filename kept plain, is emitted as a token whenever that is shorter than
+ * the rawurlencoded path. S3 bucket names cannot start with '_', so a '_'
+ * in the first path segment unambiguously marks a token.
+ *
  * DICTIONARY_V1 is a wire-protocol contract shared byte-for-byte with the
  * image service (image-service-lambda lib/url-codec.js). NEVER edit it:
  * published URLs depend on it forever. To improve the vocabulary, add a new
@@ -181,6 +187,76 @@ class UrlCodec
             . self::base64UrlEncode(deflate_add($context, $text, ZLIB_FINISH));
     }
 
+    /**
+     * Encodes a source image path into its shortest URL form: plain
+     * rawurlencoded segments, a token for the directory part with the
+     * filename kept plain (visible for image SEO), or a token for the whole
+     * path. Ties prefer the more readable form. Deterministic per input, so
+     * URLs stay stable for caching.
+     *
+     * @param string $path
+     */
+    public static function compressSourcePath(string $path): string
+    {
+        $best = implode(
+            '/',
+            array_map(
+                'rawurlencode',
+                explode('/', $path)
+            )
+        );
+
+        $slash = mb_strrpos($path, '/');
+
+        if ($slash !== false && $slash > 0) {
+            $dirsOnly = self::compress(mb_substr($path, 0, $slash))
+                . '/'
+                . rawurlencode(mb_substr($path, $slash + 1));
+
+            if (mb_strlen($dirsOnly) < mb_strlen($best)) {
+                $best = $dirsOnly;
+            }
+        }
+
+        $full = self::compress($path);
+
+        if (mb_strlen($full) < mb_strlen($best)) {
+            $best = $full;
+        }
+
+        return $best;
+    }
+
+    /**
+     * Decodes a source path produced by compressSourcePath() back to the
+     * raw path. Mirrors the image service (image-service-lambda
+     * lib/url-token-params.js): a '_' first segment is decompressed, any
+     * remaining segments are plain and rawurldecoded.
+     *
+     * @param string $path
+     */
+    public static function decompressSourcePath(string $path): string
+    {
+        $segments = explode('/', $path);
+
+        if (mb_substr($segments[0], 0, 1) !== self::COMPRESSED_PREFIX) {
+            return implode(
+                '/',
+                array_map('rawurldecode', $segments)
+            );
+        }
+
+        $head = self::decompress(array_shift($segments));
+
+        return implode(
+            '/',
+            array_merge(
+                [$head],
+                array_map('rawurldecode', $segments)
+            )
+        );
+    }
+
     public static function decompress(string $token): string
     {
         if (mb_substr($token, 0, 1) !== self::COMPRESSED_PREFIX) {
@@ -218,7 +294,7 @@ class UrlCodec
         return $text;
     }
 
-    protected static function base64UrlEncode(string $bytes): string
+    public static function base64UrlEncode(string $bytes): string
     {
         return rtrim(strtr(base64_encode($bytes), '+/', '-_'), '=');
     }

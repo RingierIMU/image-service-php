@@ -76,6 +76,74 @@ final class UrlCodecTest extends TestCase
         $this->assertSame($json, UrlCodec::decompress($token));
     }
 
+    public function testSourcePathKeepsShortPathsPlain(): void
+    {
+        $this->assertSame(
+            'bucket/file.jpg',
+            UrlCodec::compressSourcePath('bucket/file.jpg')
+        );
+    }
+
+    public function testSourcePathRawurlencodesPlainSegments(): void
+    {
+        $this->assertSame(
+            'b/a%20c.jpg',
+            UrlCodec::compressSourcePath('b/a c.jpg')
+        );
+    }
+
+    public function testSourcePathCompressesDirectoriesKeepingFilenameVisible(): void
+    {
+        // high-entropy hash filenames stay plain; the dictionary-friendly
+        // directory part becomes the token
+        $path = 'prod-property-core-backend-media-imo/4185-1130/62/b2071156961e037f4e0925e75caaf8ec-gallery_image_large.jpg';
+
+        $encoded = UrlCodec::compressSourcePath($path);
+
+        $this->assertStringStartsWith('_1', $encoded);
+        $this->assertStringEndsWith('/b2071156961e037f4e0925e75caaf8ec-gallery_image_large.jpg', $encoded);
+        $this->assertLessThan(mb_strlen(rawurlencode($path)), mb_strlen($encoded));
+        $this->assertSame($path, UrlCodec::decompressSourcePath($encoded));
+    }
+
+    public function testSourcePathCompressesWholeDictionaryFriendlyPaths(): void
+    {
+        $path = 'horizon-files-prod/og-template/job-square-04-2022/background.png';
+
+        $encoded = UrlCodec::compressSourcePath($path);
+
+        $this->assertStringStartsWith('_1', $encoded);
+        $this->assertStringNotContainsString('/', $encoded);
+        $this->assertSame($path, UrlCodec::decompressSourcePath($encoded));
+    }
+
+    public function testSourcePathTokensAreUrlSafe(): void
+    {
+        $encoded = UrlCodec::compressSourcePath(
+            'prod-property-core-backend-media-imo/4185-1130/62/b2071156961e037f4e0925e75caaf8ec.jpg'
+        );
+
+        foreach (explode('/', $encoded) as $segment) {
+            $this->assertSame($segment, rawurlencode($segment));
+        }
+    }
+
+    public function testSourcePathRoundTripsSpecialCharacters(): void
+    {
+        $paths = [
+            'bucket/dir/imagine româna 100%+.jpg',
+            'prod-property-core-backend-media-brk/2023-11/apartament de vânzare.jpg',
+            'bucket/no-directories.png',
+        ];
+
+        foreach ($paths as $path) {
+            $this->assertSame(
+                $path,
+                UrlCodec::decompressSourcePath(UrlCodec::compressSourcePath($path))
+            );
+        }
+    }
+
     public function testDictionaryIsFrozen(): void
     {
         // wire-protocol contract with image-service-lambda lib/url-codec.js;
