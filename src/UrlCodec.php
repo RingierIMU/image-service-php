@@ -36,141 +36,142 @@ class UrlCodec
 
     protected const VERSION_DICTIONARY_V1 = '1';
 
-    protected const DICTIONARY_V1 = ''
-        . 'backgrounds/'
-        . 'overlays/'
-        . 'placeholders/'
-        . '.svg'
-        . '.webp'
-        . '","cornerOverlayColor":"'
-        . '","cornerStripColor":"'
-        . '","brandWebsite":"'
-        . '","brandWebsiteColor":"'
-        . '","brandWidth":"'
-        . '","companyColor":"'
-        . '","titleColor":"'
-        . '","subtitleColor":"'
-        . '","subtitleBorderColor":"'
-        . '","ctaColor":"'
-        . '","ctaBackgroundColor":"'
-        . '","priceColor":"'
-        . '","priceBackgroundColor":"'
-        . '","priceBackgroundOpacity":"'
-        . '","jobTitleColor":"'
-        . '","jobFunctionColor":"'
-        . '","salaryColor":"'
-        . '","salaryIconColor":"'
-        . '","locationColor":"'
-        . '","locationIconColor":"'
-        . '","workTypeColor":"'
-        . '","workTypeIconColor":"'
-        . '","infoValue1Color":"'
-        . '","infoValue2Color":"'
-        . '","infoValue3Color":"'
-        . '","infoLabel1Color":"'
-        . '","infoLabel2Color":"'
-        . '","infoLabel3Color":"'
-        . '","backgroundGradientFrom":"'
-        . '","backgroundGradientTo":"'
-        . '","backgroundGradientColor":"'
-        . '","sideGradientFrom":"'
-        . '","sideGradientTo":"'
-        . '","footerBackgroundColor":"'
-        . '","brandBackgroundColor":"'
-        . '","brandBackgroundStripeColor":"'
-        . '","fontFamily":"Roboto'
-        . '#ffffff'
-        . '#000000'
-        . 'transparent'
-        . 'aimg.brightermonday.co.ke/'
-        . 'imo-static-public-prod/'
-        . 'imo-original-imgs-prod/imagini_agentii_originale/'
-        . 'mx-files-prod-ritdu-rsmg/entity-list/'
-        . 'horizon-files-staging/'
-        . 'sdc-bn-production/'
-        . 'cde-bn-production/client-8/'
-        . 'user-img-gh-jobs-prod/userid'
-        . 'advertiser-img-gh-jobs-prod/dealer-images/advid'
-        . 'prod-property-core-backend-media-brk/'
-        . 'prod-property-core-backend-media-rad/'
-        . 'category-rectangle-2022-10'
-        . 'category-rectangle-2025-08'
-        . 'category-square'
-        . 'job-square-04-2022'
-        . 'job-square'
-        . 'business'
-        . '","titleWithoutSubtitle1":"'
-        . '","titleWithoutSubtitle2":"'
-        . '","title1Large":"'
-        . '","title3_1":"'
-        . '","title3_2":"'
-        . '","title3_3":"'
-        . '","location2_1":"'
-        . '","location2_2":"'
-        . '","subtitle1":"'
-        . '","subtitle2":"'
-        . '","company":"'
-        . '","title":"'
-        . 'Internship & Graduate'
-        . 'Part Time'
-        . 'Contract'
-        . 'Unspecified'
-        . 'Confidential'
-        . 'GHS '
-        . 'Management & Business Development'
-        . 'Accounting, Auditing & Finance'
-        . 'Engineering & Technology'
-        . 'Admin & Office'
-        . 'Sales'
-        . 'Accra & Tema Region'
-        . 'Kumasi & Ashanti Region'
-        . ' Region'
-        . 'Dakar | Temps plein'
-        . 'Nairobi | Full time'
-        . 'Full Time'
-        . 'SUPR. TEREN '
-        . 'CIRCULAR'
-        . 'parter'
-        . 'SEMIDECOMANDAT'
-        . 'CASĂ'
-        . 'APARTAMENT'
-        . 'CAMERĂ'
-        . 'BĂI'
-        . 'de închiriat'
-        . 'de vânzare'
-        . '.000 €'
-        . '0 €'
-        . 'Recrutement ouvert'
-        . 'Now Hiring'
-        . 'shared-folder-prod/2022-10/square/'
-        . 'shared-folder-prod/2024-09/rectangle/'
-        . 'shared-folder-prod/2025-09/rectangle/'
-        . 'horizon-files-prod/og-template/job-square-04-2022/'
-        . '/ed/picture/'
-        . '/pi/logo/'
-        . '/ed/logo/'
-        . '.jpeg"'
-        . '.png"'
-        . '"embed":'
-        . '"resize":{'
-        . '{"fit":"'
-        . ',"w":'
-        . ',"h":'
-        . '{"dpr":'
-        . '"ow":"'
-        . '"oi":'
-        . '{"or":180}'
-        . '{"or":270}'
-        . '{"or":90}'
-        . '{"or":0}'
-        . '"images":[]}'
-        . '"},"logo":{"file":"s3://'
-        . '"},"background":{"file":"s3://'
-        . '{"template":"business","replacements":{"title":"'
-        . '{"template":"job-09-2024","replacements":{"jobTitle":"","jobFunction":"","salary":"","location":"","workType":""},"images":{"background":{"file":"s3://'
-        . '-dark'
-        . '{"template":"cde-prop-meta-carousel-06-2025-light","replacements":{"title1Regular":"APARTAMENT","title2":"de vânzare","subtitle":"","price":"","infoValue1":"","infoLabel1":"CAMERE","infoValue2":"","infoLabel2":"SUPRAFAȚĂ","infoValue3":"","infoLabel3":"ETAJ"},"images":{"background":{"file":"s3://prod-property-core-backend-media-imo/'
-        . '{"template":"job-04-2022","replacements":{"title1":"","title2":"","subtitle":"","cta":"Now Hiring"},"images":{"background":{"file":"s3://horizon-files-prod/og-template/job-04-2022/';
+    protected const DICTIONARY_V1 =
+        ''
+            . 'backgrounds/'
+            . 'overlays/'
+            . 'placeholders/'
+            . '.svg'
+            . '.webp'
+            . '","cornerOverlayColor":"'
+            . '","cornerStripColor":"'
+            . '","brandWebsite":"'
+            . '","brandWebsiteColor":"'
+            . '","brandWidth":"'
+            . '","companyColor":"'
+            . '","titleColor":"'
+            . '","subtitleColor":"'
+            . '","subtitleBorderColor":"'
+            . '","ctaColor":"'
+            . '","ctaBackgroundColor":"'
+            . '","priceColor":"'
+            . '","priceBackgroundColor":"'
+            . '","priceBackgroundOpacity":"'
+            . '","jobTitleColor":"'
+            . '","jobFunctionColor":"'
+            . '","salaryColor":"'
+            . '","salaryIconColor":"'
+            . '","locationColor":"'
+            . '","locationIconColor":"'
+            . '","workTypeColor":"'
+            . '","workTypeIconColor":"'
+            . '","infoValue1Color":"'
+            . '","infoValue2Color":"'
+            . '","infoValue3Color":"'
+            . '","infoLabel1Color":"'
+            . '","infoLabel2Color":"'
+            . '","infoLabel3Color":"'
+            . '","backgroundGradientFrom":"'
+            . '","backgroundGradientTo":"'
+            . '","backgroundGradientColor":"'
+            . '","sideGradientFrom":"'
+            . '","sideGradientTo":"'
+            . '","footerBackgroundColor":"'
+            . '","brandBackgroundColor":"'
+            . '","brandBackgroundStripeColor":"'
+            . '","fontFamily":"Roboto'
+            . '#ffffff'
+            . '#000000'
+            . 'transparent'
+            . 'aimg.brightermonday.co.ke/'
+            . 'imo-static-public-prod/'
+            . 'imo-original-imgs-prod/imagini_agentii_originale/'
+            . 'mx-files-prod-ritdu-rsmg/entity-list/'
+            . 'horizon-files-staging/'
+            . 'sdc-bn-production/'
+            . 'cde-bn-production/client-8/'
+            . 'user-img-gh-jobs-prod/userid'
+            . 'advertiser-img-gh-jobs-prod/dealer-images/advid'
+            . 'prod-property-core-backend-media-brk/'
+            . 'prod-property-core-backend-media-rad/'
+            . 'category-rectangle-2022-10'
+            . 'category-rectangle-2025-08'
+            . 'category-square'
+            . 'job-square-04-2022'
+            . 'job-square'
+            . 'business'
+            . '","titleWithoutSubtitle1":"'
+            . '","titleWithoutSubtitle2":"'
+            . '","title1Large":"'
+            . '","title3_1":"'
+            . '","title3_2":"'
+            . '","title3_3":"'
+            . '","location2_1":"'
+            . '","location2_2":"'
+            . '","subtitle1":"'
+            . '","subtitle2":"'
+            . '","company":"'
+            . '","title":"'
+            . 'Internship & Graduate'
+            . 'Part Time'
+            . 'Contract'
+            . 'Unspecified'
+            . 'Confidential'
+            . 'GHS '
+            . 'Management & Business Development'
+            . 'Accounting, Auditing & Finance'
+            . 'Engineering & Technology'
+            . 'Admin & Office'
+            . 'Sales'
+            . 'Accra & Tema Region'
+            . 'Kumasi & Ashanti Region'
+            . ' Region'
+            . 'Dakar | Temps plein'
+            . 'Nairobi | Full time'
+            . 'Full Time'
+            . 'SUPR. TEREN '
+            . 'CIRCULAR'
+            . 'parter'
+            . 'SEMIDECOMANDAT'
+            . 'CASĂ'
+            . 'APARTAMENT'
+            . 'CAMERĂ'
+            . 'BĂI'
+            . 'de închiriat'
+            . 'de vânzare'
+            . '.000 €'
+            . '0 €'
+            . 'Recrutement ouvert'
+            . 'Now Hiring'
+            . 'shared-folder-prod/2022-10/square/'
+            . 'shared-folder-prod/2024-09/rectangle/'
+            . 'shared-folder-prod/2025-09/rectangle/'
+            . 'horizon-files-prod/og-template/job-square-04-2022/'
+            . '/ed/picture/'
+            . '/pi/logo/'
+            . '/ed/logo/'
+            . '.jpeg"'
+            . '.png"'
+            . '"embed":'
+            . '"resize":{'
+            . '{"fit":"'
+            . ',"w":'
+            . ',"h":'
+            . '{"dpr":'
+            . '"ow":"'
+            . '"oi":'
+            . '{"or":180}'
+            . '{"or":270}'
+            . '{"or":90}'
+            . '{"or":0}'
+            . '"images":[]}'
+            . '"},"logo":{"file":"s3://'
+            . '"},"background":{"file":"s3://'
+            . '{"template":"business","replacements":{"title":"'
+            . '{"template":"job-09-2024","replacements":{"jobTitle":"","jobFunction":"","salary":"","location":"","workType":""},"images":{"background":{"file":"s3://'
+            . '-dark'
+            . '{"template":"cde-prop-meta-carousel-06-2025-light","replacements":{"title1Regular":"APARTAMENT","title2":"de vânzare","subtitle":"","price":"","infoValue1":"","infoLabel1":"CAMERE","infoValue2":"","infoLabel2":"SUPRAFAȚĂ","infoValue3":"","infoLabel3":"ETAJ"},"images":{"background":{"file":"s3://prod-property-core-backend-media-imo/'
+            . '{"template":"job-04-2022","replacements":{"title1":"","title2":"","subtitle":"","cta":"Now Hiring"},"images":{"background":{"file":"s3://horizon-files-prod/og-template/job-04-2022/';
 
     public static function compress(string $text): string
     {
@@ -179,7 +180,7 @@ class UrlCodec
             [
                 'level' => 9,
                 'dictionary' => self::DICTIONARY_V1,
-            ]
+            ],
         );
 
         return self::COMPRESSED_PREFIX
@@ -202,14 +203,15 @@ class UrlCodec
             '/',
             array_map(
                 'rawurlencode',
-                explode('/', $path)
-            )
+                explode('/', $path),
+            ),
         );
 
         $slash = mb_strrpos($path, '/');
 
         if ($slash !== false && $slash > 0) {
-            $dirsOnly = self::compress(mb_substr($path, 0, $slash))
+            $dirsOnly =
+                self::compress(mb_substr($path, 0, $slash))
                 . '/'
                 . rawurlencode(mb_substr($path, $slash + 1));
 
@@ -242,7 +244,7 @@ class UrlCodec
         if (mb_substr($segments[0], 0, 1) !== self::COMPRESSED_PREFIX) {
             return implode(
                 '/',
-                array_map('rawurldecode', $segments)
+                array_map('rawurldecode', $segments),
             );
         }
 
@@ -252,8 +254,8 @@ class UrlCodec
             '/',
             array_merge(
                 [$head],
-                array_map('rawurldecode', $segments)
-            )
+                array_map('rawurldecode', $segments),
+            ),
         );
     }
 
@@ -284,7 +286,7 @@ class UrlCodec
         $text = @inflate_add(
             $context,
             self::base64UrlDecode(mb_substr($token, 2)),
-            ZLIB_FINISH
+            ZLIB_FINISH,
         );
 
         if ($text === false) {
@@ -304,7 +306,7 @@ class UrlCodec
         $base64 = strtr($encoded, '-_', '+/');
         $bytes = base64_decode(
             str_pad($base64, (int) ceil(mb_strlen($base64) / 4) * 4, '='),
-            true
+            true,
         );
 
         if ($bytes === false) {

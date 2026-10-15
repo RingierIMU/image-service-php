@@ -37,14 +37,14 @@ final class ImageResizeTest extends TestCase
         // directories compress into a token, the filename stays readable
         $this->assertEquals(
             'https://image-service.ringier.tech/hz/pi/listing-thumb-360w/WtOn6QZtQBeHwqijej_Cyg/-/_1w6IUmDdh-bQw2yS3yjwLAA/e6be465dd23e0ef571fcdbd3f46bfe1c8486cd52.jpg',
-            $url
+            $url,
         );
 
         $this->assertEquals(
             'horizon-files-prod/pi/picture/qk4mz7j/e6be465dd23e0ef571fcdbd3f46bfe1c8486cd52.jpg',
             UrlCodec::decompressSourcePath(
-                implode('/', array_slice(explode('/', $url), 8))
-            )
+                implode('/', array_slice(explode('/', $url), 8)),
+            ),
         );
     }
 
@@ -64,7 +64,7 @@ final class ImageResizeTest extends TestCase
 
         $this->assertEquals(
             'https://image-service.ringier.tech/hz/pi/listing-thumb-360w/vRiosggBpO5G9nOcRkk2-g/-/bucket/file.jpg',
-            $url
+            $url,
         );
     }
 
@@ -84,25 +84,25 @@ final class ImageResizeTest extends TestCase
                 'w' => 360,
                 'h' => 240,
                 'fit' => 'crop',
-            ]
+            ],
         );
 
         $this->assertEquals(
             'https://image-service.ringier.tech/hz/pi/listing-thumb-360w/We1ryJtuobglqBVQUKoiMg/-_1g2WtZKDflMBZy8jEAJzPjM0MagE/_1w6IUmDdh-bQw2yS3yjwLAA/e6be465dd23e0ef571fcdbd3f46bfe1c8486cd52.jpg',
-            $url
+            $url,
         );
 
         $paramsSegment = explode('/', $url)[7];
         $this->assertEquals(
             '{"fit":"crop","h":240,"w":360}',
-            UrlCodec::decompress(mb_substr($paramsSegment, 1))
+            UrlCodec::decompress(mb_substr($paramsSegment, 1)),
         );
 
         $this->assertEquals(
             'horizon-files-prod/pi/picture/qk4mz7j/e6be465dd23e0ef571fcdbd3f46bfe1c8486cd52.jpg',
             UrlCodec::decompressSourcePath(
-                implode('/', array_slice(explode('/', $url), 8))
-            )
+                implode('/', array_slice(explode('/', $url), 8)),
+            ),
         );
     }
 
@@ -133,12 +133,12 @@ final class ImageResizeTest extends TestCase
                         'file' => 's3://horizon-files-prod/pi/picture/qk4mz7j/e6be465dd23e0ef571fcdbd3f46bfe1c8486cd52.jpg',
                     ],
                 ],
-            ]
+            ],
         );
 
         $this->assertEquals(
             'https://image-service.ringier.tech/t/hz/pi/og-template-1200w-630h/CCxhLrxrtzdQk1Cc5gx3Dg/-/_1I8fN4FSqkANM-gqGyO5HEjdC9QusGgNLovoCWxbE4n5ggQErPAqzTXKrzLP0U82SUk3MTFNSjIxTDVLTTM0N05JTklKM00zMktJSDZMtTCzMklNMjYBFSzr-TE0L-2prAQ/pretty-seo-filename.jpg',
-            $url
+            $url,
         );
 
         $this->assertLessThan(1024, mb_strlen($url));
@@ -161,7 +161,7 @@ final class ImageResizeTest extends TestCase
                     ],
                 ],
             ],
-            json_decode(UrlCodec::decompress($templateSegment), true)
+            json_decode(UrlCodec::decompress($templateSegment), true),
         );
     }
 }

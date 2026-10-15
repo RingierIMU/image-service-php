@@ -16,7 +16,7 @@ class ImageResize
 
     public function __construct(
         string $imageServiceUrl,
-        string $imageServiceKey
+        string $imageServiceKey,
     ) {
         $this->imageServiceUrl = $imageServiceUrl;
         $this->imageServiceKey = $imageServiceKey;
@@ -27,13 +27,13 @@ class ImageResize
         string $venture,
         string $resizeKey,
         string $sourceImageUrl,
-        array $imageParams = []
+        array $imageParams = [],
     ): string {
         $resizePath = sprintf(
             '%s/%s/%s',
             $project,
             $venture,
-            $resizeKey
+            $resizeKey,
         );
 
         // strip http(s):// from $sourceImageUrl
@@ -54,18 +54,20 @@ class ImageResize
             [
                 urlencode('-' . $imageParamsPath),
                 UrlCodec::compressSourcePath(trim($sourceImageUrl, '/')),
-            ]
+            ],
         );
 
         $signature = $this->signature($resizePath . '/' . $imagePathPostfix);
 
-        return $imageHost
-            . '/'
-            . $resizePath
-            . '/'
-            . $signature
-            . '/'
-            . $imagePathPostfix;
+        return (
+            $imageHost
+                . '/'
+                . $resizePath
+                . '/'
+                . $signature
+                . '/'
+                . $imagePathPostfix
+        );
     }
 
     public function buildTemplateUrl(
@@ -74,13 +76,13 @@ class ImageResize
         string $resizeKey,
         string $seoFilename,
         array $templateParams,
-        array $imageParams = []
+        array $imageParams = [],
     ): string {
         $resizePath = sprintf(
             't/%s/%s/%s',
             $project,
             $venture,
-            $resizeKey
+            $resizeKey,
         );
 
         unset($imageParams['s']);
@@ -105,25 +107,27 @@ class ImageResize
                                         'replacements' => [],
                                         'images' => [],
                                     ],
-                                    $templateParams
-                                )
-                            )
+                                    $templateParams,
+                                ),
+                            ),
                         ),
                     ],
-                    [trim($seoFilename, '/')]
-                )
-            )
+                    [trim($seoFilename, '/')],
+                ),
+            ),
         );
 
         $signature = $this->signature($resizePath . '/' . $imagePathPostfix);
 
-        return $imageHost
-            . '/'
-            . $resizePath
-            . '/'
-            . $signature
-            . '/'
-            . $imagePathPostfix;
+        return (
+            $imageHost
+                . '/'
+                . $resizePath
+                . '/'
+                . $signature
+                . '/'
+                . $imagePathPostfix
+        );
     }
 
     /**
@@ -137,10 +141,10 @@ class ImageResize
         return UrlCodec::base64UrlEncode(
             md5(
                 $this->imageServiceKey
-                . ':'
-                . $signedPath,
-                true
-            )
+                    . ':'
+                    . $signedPath,
+                true,
+            ),
         );
     }
 
@@ -148,7 +152,7 @@ class ImageResize
     {
         return json_encode(
             $params,
-            JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE
+            JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE,
         );
     }
 }

@@ -25,7 +25,7 @@ final class UrlCodecTest extends TestCase
                     ],
                 ],
             ],
-            JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE
+            JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE,
         );
 
         $token = UrlCodec::compress($text);
@@ -36,7 +36,7 @@ final class UrlCodecTest extends TestCase
     public function testTokenIsUrlSafe(): void
     {
         $token = UrlCodec::compress(
-            str_repeat('{"key":"value","path":"s3://bucket/some/long/path.jpg"}', 20)
+            str_repeat('{"key":"value","path":"s3://bucket/some/long/path.jpg"}', 20),
         );
 
         $this->assertSame($token, urlencode($token));
@@ -54,7 +54,7 @@ final class UrlCodecTest extends TestCase
 
         $legacy = urlencode(base64_encode(json_encode($params)));
         $token = UrlCodec::compress(
-            json_encode($params, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE)
+            json_encode($params, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
         );
 
         $this->assertGreaterThan(1024, mb_strlen($legacy));
@@ -80,7 +80,7 @@ final class UrlCodecTest extends TestCase
     {
         $this->assertSame(
             'bucket/file.jpg',
-            UrlCodec::compressSourcePath('bucket/file.jpg')
+            UrlCodec::compressSourcePath('bucket/file.jpg'),
         );
     }
 
@@ -88,7 +88,7 @@ final class UrlCodecTest extends TestCase
     {
         $this->assertSame(
             'b/a%20c.jpg',
-            UrlCodec::compressSourcePath('b/a c.jpg')
+            UrlCodec::compressSourcePath('b/a c.jpg'),
         );
     }
 
@@ -120,7 +120,7 @@ final class UrlCodecTest extends TestCase
     public function testSourcePathTokensAreUrlSafe(): void
     {
         $encoded = UrlCodec::compressSourcePath(
-            'prod-property-core-backend-media-imo/4185-1130/62/b2071156961e037f4e0925e75caaf8ec.jpg'
+            'prod-property-core-backend-media-imo/4185-1130/62/b2071156961e037f4e0925e75caaf8ec.jpg',
         );
 
         foreach (explode('/', $encoded) as $segment) {
@@ -139,7 +139,7 @@ final class UrlCodecTest extends TestCase
         foreach ($paths as $path) {
             $this->assertSame(
                 $path,
-                UrlCodec::decompressSourcePath(UrlCodec::compressSourcePath($path))
+                UrlCodec::decompressSourcePath(UrlCodec::compressSourcePath($path)),
             );
         }
     }
