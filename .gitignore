@@ -13,3 +13,4 @@ composer.lock
 /.phpcs.cache
 /.phpcs.xml
 /pint.json
+/mago.toml

@@ -17,7 +17,7 @@
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5",
-        "ringierimu/ringier-code-style": "^0.6"
+        "ringierimu/ringier-code-style": "^1"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -42,8 +42,7 @@
             "@dump-code-style-configs"
         ],
         "dump-code-style-configs": [
-            "vendor/bin/ringier-code-style config:dump --pint --php-cs-fixer --phpcs --force --quiet",
-            "vendor/bin/ringier-code-style config:dump --styleci --quiet"
+            "vendor/bin/ringier-code-style config:dump --workflow --all --force --quiet"
         ],
         "fix-code-style": [
             "vendor/bin/ringier-code-style fix src tests"
